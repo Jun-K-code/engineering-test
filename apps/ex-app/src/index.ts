@@ -4,3 +4,7 @@ const main = () => {
   console.log('测试', add(1, 2));
 };
 main();
+
+function test() {
+  console.log('test');
+}
