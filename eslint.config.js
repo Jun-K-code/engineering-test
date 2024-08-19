@@ -1,6 +1,8 @@
 import js from '@eslint/js';
 import tsEslintParser from '@typescript-eslint/parser';
+import eslintPrettier from 'eslint-config-prettier';
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
+import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
   // 该配置项 告诉 ESLint，我们拓展了哪些指定的配置集
@@ -13,6 +15,8 @@ export default [
   //   'plugin:@typescript-eslint/eslint-recommended',
   // ],
   js.configs.recommended,
+  // prettier（即eslint-config-prettier）关闭所有可能干扰 Prettier 规则的 ESLint 规则，确保将其放在最后，这样它有机会覆盖其它配置。
+  eslintPrettier,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     ignores: ['node_modules/', 'pnpm-lock.yaml', '**/*.config.js'], // 根据你的 .eslintignore 文件内容添加
@@ -23,6 +27,18 @@ export default [
 
     // 该配置项指示要加载的插件，这里
     // @typescript-eslint 插件使得我们能够在我们的存储库中，使用 typescript-eslint 包定义的规则集。
-    plugins: { '@typescript-eslint': tsEslintPlugin },
+    // prettier插件（即eslint-plugin-prettier）将 Prettier 规则转换为 ESLint规则。
+    plugins: {
+      '@typescript-eslint': tsEslintPlugin,
+      'prettier': prettierPlugin,
+    },
+    rules: {
+      'prettier/prettier': 'error', // 打开prettier插件提供的规则，该插件从 ESLint 内运行 Prettier
+
+      // 关闭这两个 ESLint 核心规则，这两个规则 和 Prettier插件一起使用会出现问题，具体可参阅
+      // https://github.com/prettier/eslint-plugin-prettier/blob/master/README.md#arrow-body-style-and-prefer-arrow-callback-issue
+      'arrow-body-style': 'off',
+      'prefer-arrow-callback': 'off',
+    },
   },
 ];
