@@ -1,9 +1,10 @@
 import js from '@eslint/js';
+import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 import tsEslintParser from '@typescript-eslint/parser';
 import eslintPrettier from 'eslint-config-prettier';
-import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 
+// 官方配置文档：https://eslint.org/docs/latest/use/configure
 export default [
   // 该配置项 告诉 ESLint，我们拓展了哪些指定的配置集
   // eslint:recommended : 该配置集是 ESLint 内置的“推荐”，它打开一组小的、合理的规则，用于检查众所周知的最佳实践。
@@ -30,7 +31,7 @@ export default [
     // prettier插件（即eslint-plugin-prettier）将 Prettier 规则转换为 ESLint规则。
     plugins: {
       '@typescript-eslint': tsEslintPlugin,
-      'prettier': prettierPlugin,
+      prettier: prettierPlugin,
     },
     rules: {
       'prettier/prettier': 'error', // 打开prettier插件提供的规则，该插件从 ESLint 内运行 Prettier
