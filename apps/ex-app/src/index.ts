@@ -5,6 +5,7 @@ const main = () => {
 };
 main();
 
-// function test() {
-//   console.log('test');
-// }
+function test() {
+  console.log('test');
+}
+test1();
