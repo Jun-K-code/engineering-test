@@ -1,4 +1,4 @@
-import js from '@eslint/js';
+import js from '@eslint/js'; // eslint推荐配置
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 import tsEslintParser from '@typescript-eslint/parser';
 import eslintPrettier from 'eslint-config-prettier';
@@ -16,6 +16,7 @@ export default [
   //   'plugin:@typescript-eslint/eslint-recommended',
   // ],
   js.configs.recommended,
+  // https://prettier.io/docs/en/install#eslint-and-other-linters
   // prettier（即eslint-config-prettier）关闭所有可能干扰 Prettier 规则的 ESLint 规则，确保将其放在最后，这样它有机会覆盖其它配置。
   eslintPrettier,
   {
